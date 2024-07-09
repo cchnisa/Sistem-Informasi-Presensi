@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,8 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $charts->register([
-        //     \App\Charts\AttendanceChart::class
-        // ]);
+        // View::composer('_navbar', function ($view) {
+        //     $activitiesOuts = ActivitiesOut::all();
+        //     $view->with('activitiesOuts', $activitiesOuts);
+        // });
     }
 }

@@ -1,0 +1,28 @@
+.yellow-background {
+    background-color: yellow;
+}
+.login-box {
+    background-color: yellow; /* Mengubah warna latar belakang login-box menjadi kuning */
+}
+
+.login-card-body {
+    background-color: lightyellow; /* Mengubah warna latar belakang login-card-body menjadi kuning muda */
+}
+
+.login-box-msg {
+    color: blue; /* Mengubah warna teks login-box-msg menjadi biru */
+}
+
+.btn-primary {
+    background-color: blue; /* Mengubah warna latar belakang tombol Sign In menjadi biru */
+    border-color: blue; /* Mengubah warna border tombol Sign In menjadi biru */
+}
+
+.btn-primary:hover {
+    background-color: darkblue; /* Mengubah warna latar belakang tombol Sign In saat dihover menjadi biru tua */
+    border-color: darkblue; /* Mengubah warna border tombol Sign In saat dihover menjadi biru tua */
+}
+
+.invalid-feedback {
+    color: red; /* Mengubah warna teks invalid-feedback menjadi merah */
+}

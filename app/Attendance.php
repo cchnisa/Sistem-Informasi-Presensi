@@ -9,6 +9,7 @@ class Attendance extends Model
 {
     protected $guarded = [];
 
+
     public function scopeCountAttendance($query, $status)
     {
         return $query->whereDate('created_at', Carbon::today())
@@ -24,4 +25,14 @@ class Attendance extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function activitiesout()
+    {
+        return $this->hasMany(ActivitiesOut::class);
+    }
+
+    // public function location()
+    // {
+    //     return $this->belongsTo(Location::class);
+    // }
 }

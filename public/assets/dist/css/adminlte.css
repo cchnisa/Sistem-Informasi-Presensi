@@ -66,7 +66,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #ffffff;
+  background-color: #f7cf05;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -2614,8 +2614,8 @@ fieldset:disabled a.btn {
 
 .btn-secondary {
   color: #ffffff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: #0062cc;
+  border-color: #005cbf;
   box-shadow: none;
 }
 
@@ -20322,7 +20322,7 @@ html.maximized-card {
 .register-page {
   -ms-flex-align: center;
   align-items: center;
-  background: #e9ecef;
+  background: #e4b33d;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;

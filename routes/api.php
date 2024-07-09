@@ -33,3 +33,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('attendance', 'Api\AttendanceController@store');
     Route::get('attendance/history', 'Api\AttendanceController@history');
 });
+
+Route::group(['middleware' => 'auth:sanctum'], function() {
+    Route::post('locations', 'LocationController@store');
+    Route::get('locations/getLocation', 'Api\LocationController@getLocation');
+});
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::post('activitiesout', 'Api\ActivitiesOutController@store');
+});

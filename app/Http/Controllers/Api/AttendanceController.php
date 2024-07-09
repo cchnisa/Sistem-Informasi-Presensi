@@ -27,6 +27,7 @@ class AttendanceController extends Controller
             'lat' => ['required'],
             'address' => ['required'],
             'type' => ['in:in,out', 'required'],
+            'distance' => ['required'],
             'photo' => ['required']
         ]);
 
@@ -40,7 +41,7 @@ class AttendanceController extends Controller
         // is presence type equal with 'in' ?
         if ($attendanceType == 'in') {
             // is $userPresenceToday not found?
-            if (! $userAttendanceToday) {
+            if (!$userAttendanceToday) {
                 $attendance = $request
                     ->user()
                     ->attendances()
@@ -56,6 +57,7 @@ class AttendanceController extends Controller
                         'long' => $request->long,
                         'lat' => $request->lat,
                         'photo' => $this->uploadImage($photo, $request->user()->name, 'attendance'),
+                        'distance' => $request->distance,
                         'address' => $request->address
                     ]
                 );
@@ -101,7 +103,8 @@ class AttendanceController extends Controller
                         'long' => $request->long,
                         'lat' => $request->lat,
                         'photo' => $this->uploadImage($photo, $request->user()->name, 'attendance'),
-                        'address' => $request->address
+                        'distance' => $request->distance,
+                        'address' => $request->address,
                     ]
                 );
 
@@ -145,9 +148,31 @@ class AttendanceController extends Controller
                 ]
             )->get();
 
+        $ontimeCount = $request->user()->attendances()
+            ->whereBetween(
+                DB::raw('DATE(created_at)'),
+                [
+                    $request->from, $request->to
+                ]
+            )
+            ->where('created_at', '<', '8')
+            ->count();
+
+        $lateCount = $request->user()->attendances()
+            ->whereBetween(
+                DB::raw('DATE(created_at)'),
+                [
+                    $request->from, $request->to
+                ]
+            )
+            ->where('created_at', '>', '8')
+            ->count();
+
         return response()->json(
             [
                 'message' => "list of presences by user",
+                'ontime' => $ontimeCount,
+                'late' => $lateCount,
                 'data' => $history,
             ],
             Response::HTTP_OK

@@ -14,11 +14,11 @@ class AttendanceChart extends Chart
      *
      * @return void
      */
-    
+
     public function handler(Request $request): Chart
     {
         return Chart::build()
-            ->labels(['Today'])
+            ->labels(['Hari Ini'])
             ->dataset('In', [Attendance::countAttendance(false)])
             ->dataset('Out', [Attendance::countAttendance(true)])
             ->dataset('Total User', [User::where('is_admin', false)->count()]);

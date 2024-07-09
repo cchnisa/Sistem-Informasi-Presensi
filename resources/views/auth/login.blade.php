@@ -1,14 +1,16 @@
 @extends('auth.layouts.app')
 
 @section('content')
+
 <div class="login-box">
-    <div class="login-logo">
-        <a href="#"><b>Attendance</b>Live</a>
+    <div class="login-logo" >
+    <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo">
+        <a href="#"><b>Attend</b>Ease</a>
     </div>
     <!-- /.login-logo -->
-    <div class="card">
+    <div class="card" >
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Masuk untuk memulai sesi Anda</p>
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -54,7 +56,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </div>
                     <!-- /.col -->
                 </div>

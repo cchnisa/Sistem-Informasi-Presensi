@@ -53,7 +53,7 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'message' => ['The provided credentials are incorrect.'],
             ]);
@@ -61,13 +61,24 @@ class AuthController extends Controller
 
         $accessToken = $user->createToken($request->device_name)->plainTextToken;
 
-        return response()->json([
-            'message' => 'success',
-            'data' => $user,
-            'meta' => [
-                'token' => $accessToken
-            ]
-        ], Response::HTTP_CREATED);
+        if ($user->is_admin) {
+            return response()->json([
+                'message' => 'success',
+                'data' => $user,
+                'meta' => [
+                    'token' => $accessToken
+                ]
+            ], Response::HTTP_CREATED);
+        } else {
+            return response()->json([
+                'message' => 'success',
+                'data' => $user,
+                'meta' => [
+                    'token' => $accessToken,
+                    'redirect_to' => route('home') // Mengarahkan ke halaman Kepdin
+                ]
+            ], Response::HTTP_CREATED);
+        }
     }
 
     public function logout(Request $request)

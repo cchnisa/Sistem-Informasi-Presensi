@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_admin', 'photo'
+        'name', 'email','nip', 'password', 'is_admin', 'photo', 'success', 'gender', 'field'
     ];
 
     /**
@@ -41,5 +41,10 @@ class User extends Authenticatable
     public function attendances()
     {
         return $this->hasMany(Attendance::class);
+    }
+
+    public function activitiesout()
+    {
+        return $this->hasMany(ActivitiesOut::class, 'user_id');
     }
 }

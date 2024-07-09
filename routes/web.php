@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DataSummaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -22,4 +29,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('user', 'UserController');
-Route::resource('attendance', 'AttendanceController') ->only(['index', 'show']);
+Route::get('/attendance/print', [PDFController::class, 'print'])->name('attendance.print');
+Route::resource('attendance', 'AttendanceController')->only(['index', 'show']);
+
+Route::get('/datasummary', [DataSummaryController::class, 'index'])->name('datasummary.index');
+Route::post('/datasummary/filter', [DataSummaryController::class, 'filter'])->name('datasummary.filter');
+
+Route::resource('locations', 'LocationController');
+Route::get('/locations', 'LocationController@index')->name('pages.kelolajarak.index');
+
+Route::resource('activitiesout', 'ActivitiesOutController');
+Route::get('/activitiesout', 'ActivitiesOutController@index')->name('pages.activitiesout.index');

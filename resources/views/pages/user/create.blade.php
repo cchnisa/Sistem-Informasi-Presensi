@@ -5,13 +5,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">User</h1>
+                <h1 class="m-0 text-dark">Data Pegawai</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item">User</li>
-                    <li class="breadcrumb-item active">Add</li>
+                    <li class="breadcrumb-item">Data Pegawai</li>
+                    <li class="breadcrumb-item active">Tambah Pegawai</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -33,13 +33,13 @@
                 @endif
 
                 <!-- Attendance Chart -->
-                <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary mb-2">Add</a>
+                <a href="{{ route('user.create') }}" class="btn btn-sm btn-info mb-2">Tambah Pegawai</a>
 
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="ion ion-clipboard mr-1"></i>
-                            User
+                            Pegawai
                         </h3>
                     </div>
                     <!-- /.card-header -->
@@ -48,7 +48,7 @@
                         <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="">Name</label>
+                                <label for="">Nama</label>
                                 <input type="text" name="name" class="form-control">
                             </div>
                             <div class="form-group">
@@ -56,8 +56,29 @@
                                 <input type="email" name="email" class="form-control">
                             </div>
                             <div class="form-group">
+                                <label for="">NIP</label>
+                                <input type="text" name="nip" class="form-control">
+                            </div>
+                            <div class="form-group">
                                 <label for="">Password</label>
                                 <input type="password" name="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Jenis Kelamin</label>
+                                <select name="gender" class="form-control">
+                                    <option value="male">Pria</option>
+                                    <option value="female">Wanita</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Bidang</label>
+                                <select name="field" class="form-control">
+                                    <option value="Akuisisi dan Penyimpanan Arsip">Akuisisi dan Penyimpanan Arsip</option>
+                                    <option value="Pelayanan Perpustakaan, Dokumentasi Dan Informasi">Pelayanan Perpustakaan, Dokumentasi Dan Informasi</option>
+                                    <option value="Pembinaan Dan Pelayanan Arsip">Pembinaan Dan Pelayanan Arsip</option>
+                                    <option value="Perpustakaan">Perpustakaan</option>
+                                    <option value="Sekretariat">Sekretariat</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="" style="display: block">Is Admin</label>
@@ -74,7 +95,7 @@
                                 <label for="">Photo</label>
                                 <input type="file" name="image" class="form-control-file">
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-info">Simpan</button>
                         </form>
 
                     </div>
@@ -87,4 +108,3 @@
     </div><!-- /.container-fluid -->
 </section>
 @endsection
-

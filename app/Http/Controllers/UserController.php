@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Traits\ImageStorage;
 use App\User;
+use App\ActivitiesOut;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
@@ -28,6 +29,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+
+        $activitiesOuts = ActivitiesOut::where('status', 1)->get();
+
         if ($request->ajax()) {
             $data = User::query();
 
@@ -46,7 +50,7 @@ class UserController extends Controller
         }
 
         // $users = User::paginate(5);
-        return view('pages.user.index');
+        return view('pages.user.index', compact('activitiesOuts'));
     }
 
     /**
@@ -56,7 +60,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('pages.user.create');
+        $activitiesOuts = ActivitiesOut::where('status', 1)->get();
+
+        return view('pages.user.create', compact('activitiesOuts'));
     }
 
     /**
@@ -74,6 +80,8 @@ class UserController extends Controller
         }
 
         $request['password'] = Hash::make($request->password);
+        $request['gender'] = $request->input('gender');
+        $request['field'] = $request->input('field');
 
         User::create($request->all());
 
@@ -88,8 +96,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        $activitiesOuts = ActivitiesOut::where('status', 1)->get();
+
         $user = User::findOrFail($id);
-        return view('pages.user.show', compact('user'));
+        return view('pages.user.show', compact('user', 'activitiesOuts'));
     }
 
     /**
@@ -100,8 +110,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $activitiesOuts = ActivitiesOut::where('status', 1)->get();
+        
         $user = User::findOrFail($id);
-        return view('pages.user.edit', compact('user'));
+        return view('pages.user.edit', compact('user', 'activitiesOuts'));
     }
 
     /**
@@ -128,7 +140,7 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.edit', $user->id)->with('success', 'Data saved successfully');
     }
 
     /**
@@ -139,6 +151,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $activitiesOuts = ActivitiesOut::where('status', 1)->get();
+        
         $user = User::find($id);
 
         if ($user->photo) {
